@@ -15,7 +15,7 @@ export function Edit() {
         </button>
       </form>
     </>
-  );
+  )
 }
 
-export default Edit;
+export default Edit

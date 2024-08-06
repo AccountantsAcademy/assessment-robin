@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export const Navigation = () => {
-  const [email] = useState(localStorage.getItem('email'));
+  const [email] = useState(localStorage.getItem('email'))
 
   return (
     <ul className="flex gap-4 p-4 bg-slate-200">
@@ -27,5 +27,5 @@ export const Navigation = () => {
         </li>
       )}
     </ul>
-  );
-};
+  )
+}

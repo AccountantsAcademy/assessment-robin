@@ -4,14 +4,14 @@ export const Login = () => {
       <h1 className="text-xl font-medium mb-4">Login</h1>
       <form
         onSubmit={(e) => {
-          e.preventDefault();
+          e.preventDefault()
           const email = (
             (e.target as HTMLFormElement).querySelector(
               'input[type=email]'
             ) as HTMLInputElement
-          ).value;
-          localStorage.setItem('email', email);
-          window.location.href = '/';
+          ).value
+          localStorage.setItem('email', email)
+          window.location.href = '/'
         }}
       >
         <input
@@ -25,5 +25,5 @@ export const Login = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}

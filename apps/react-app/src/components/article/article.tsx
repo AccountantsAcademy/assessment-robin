@@ -3,9 +3,9 @@ export const Article = ({
   content,
   author,
 }: {
-  title: string;
-  content: string;
-  author: string;
+  title: string
+  content: string
+  author: string
 }) => {
   return (
     <div className="border p-4">
@@ -13,5 +13,5 @@ export const Article = ({
       <p className="text-sm font-light mb-2">{author}</p>
       <p>{content}</p>
     </div>
-  );
-};
+  )
+}
