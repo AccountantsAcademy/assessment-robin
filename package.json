@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "run:app": "nx serve react-app",
-    "run:api": "nx serve graphql-api"
+    "dev:app": "nx serve react-app",
+    "dev:api": "nx serve graphql-api",
+    "dev": "npx concurrently -k -p \"[{name}]\" -n \"react-app,graphql-api\" -c \"yellow.bold,cyan.bold\" \"npm:dev:app\" \"npm:dev:api\""
   },
   "private": true,
   "dependencies": {
