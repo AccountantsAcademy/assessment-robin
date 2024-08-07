@@ -75,3 +75,4 @@ You are tasked with creating a simple blog application that has the following fe
   - A live demonstration of the application's functionality
 
 > **FYI: Usage of Microsoft GitHub Copilot is endorsed, not prohibited.**
+# accountants-academy
