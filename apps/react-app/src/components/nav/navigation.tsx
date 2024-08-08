@@ -7,7 +7,7 @@ export const Navigation = () => {
   const handeLogout = () => {
     localStorage.removeItem('email');
     localStorage.removeItem('id');
-  }
+  };
 
   return (
     <ul className="flex gap-4 p-4 bg-slate-200">

@@ -46,13 +46,13 @@ export function EditModal({ isOpen, onClose, refetch }: EditModalProps) {
             placeholder="Title"
             className="input input-bordered w-full"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={e => setTitle(e.target.value)}
           />
           <textarea
             placeholder="Content"
             className="textarea textarea-bordered w-full"
             value={content}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={e => setContent(e.target.value)}
           />
           <button type="submit" className="btn btn-primary">
             Create

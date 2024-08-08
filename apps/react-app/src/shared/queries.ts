@@ -19,19 +19,19 @@ export const REGISTER_USER = gql`
 `;
 
 export const GET_POSTS = gql`
-    query {
-      posts {
-        id: _id
-        title
-        content
-        author {
-          email
-        }
-        hasLiked
-        numberOfLikes
+  query {
+    posts {
+      id: _id
+      title
+      content
+      author {
+        email
       }
+      hasLiked
+      numberOfLikes
     }
-  `;
+  }
+`;
 
 export const GET_POST_BY_ID = gql`
   query GetPost($id: ID!) {
@@ -80,7 +80,13 @@ export const GET_NUMBER_OF_COMMENTS = gql`
 
 export const CREATE_COMMENT = gql`
   mutation CreateComment($content: String!, $postId: ID!, $authorId: ID!) {
-    createComment(createCommentInput: { content: $content, postId: $postId, authorId: $authorId }) {
+    createComment(
+      createCommentInput: {
+        content: $content
+        postId: $postId
+        authorId: $authorId
+      }
+    ) {
       id: _id
     }
   }
@@ -96,7 +102,9 @@ export const TOGGLE_POST_LIKE = gql`
 
 export const CREATE_POST = gql`
   mutation CreatePost($title: String!, $content: String!, $authorId: String!) {
-    createPost(createPostInput: { title: $title, content: $content, authorId: $authorId }) {
+    createPost(
+      createPostInput: { title: $title, content: $content, authorId: $authorId }
+    ) {
       id: _id
       title
       content

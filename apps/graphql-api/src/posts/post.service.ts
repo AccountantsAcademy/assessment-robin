@@ -29,30 +29,38 @@ export class PostService {
   }
 
   async findById(id: string, userId: string): Promise<Post> {
-    const post = await this.postModel.findById(id).populate('author').populate('likes').exec();
+    const post = await this.postModel
+      .findById(id)
+      .populate('author')
+      .populate('likes')
+      .exec();
 
     if (!post) {
       throw new NotFoundException(`Post with ID ${id} not found`);
     }
 
-    const hasLiked = post.likes.some((like) => like._id.toString() === userId);
+    const hasLiked = post.likes.some(like => like._id.toString() === userId);
 
     return {
       ...post.toObject(),
       hasLiked,
-      numberOfLikes: post.likes.length ?? 0
+      numberOfLikes: post.likes.length ?? 0,
     };
   }
 
   async findAll(userId: string): Promise<Array<Post>> {
-    const posts = await this.postModel.find().populate('author').populate('likes').exec();
+    const posts = await this.postModel
+      .find()
+      .populate('author')
+      .populate('likes')
+      .exec();
 
     return posts.map(post => {
       const hasLiked = post.likes.some(like => like._id.toString() === userId);
       return {
         ...post.toObject(),
         hasLiked,
-        numberOfLikes: post.likes.length ?? 0
+        numberOfLikes: post.likes.length ?? 0,
       };
     });
   }
@@ -60,7 +68,6 @@ export class PostService {
   async findByEmail(email: string): Promise<Post> {
     return this.postModel.findOne({ email }).exec();
   }
-
 
   async togglePostLike(postId: string, userId: string): Promise<Post> {
     const post = await this.postModel.findById(postId);
@@ -75,16 +82,14 @@ export class PostService {
       throw new NotFoundException(`User with ID ${userId} not found`);
     }
 
-    const userAlreadyLiked = post.likes.some((u) => u._id.toString() === userId);
+    const userAlreadyLiked = post.likes.some(u => u._id.toString() === userId);
 
     if (userAlreadyLiked) {
-      post.likes = post.likes.filter((u) => u._id.toString() !== userId);
+      post.likes = post.likes.filter(u => u._id.toString() !== userId);
     } else {
       post.likes.push(user);
     }
 
     return post.save();
   }
-
-
 }

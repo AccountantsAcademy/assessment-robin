@@ -11,9 +11,14 @@ import { Navigation } from './components/nav/navigation';
 import Login from './pages/login/login';
 import Overview from './pages/overview/overview';
 
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
 import Register from './pages/register/register';
-import { PostPage } from './pages/post/post-page'
+import { PostPage } from './pages/post/post-page';
 import { setContext } from '@apollo/client/link/context';
 
 const Layout = () => {
@@ -67,14 +72,14 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: userId ? `Bearer ${userId}` : "",
-    }
+      authorization: userId ? `Bearer ${userId}` : '',
+    },
   };
 });
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 const root = ReactDOM.createRoot(

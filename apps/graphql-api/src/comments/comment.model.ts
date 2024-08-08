@@ -1,8 +1,8 @@
 import { Field, ObjectType, ID } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
-import { User } from '../users/user.model'
-import { Post } from '../posts/post.model'
+import { User } from '../users/user.model';
+import { Post } from '../posts/post.model';
 
 @Schema({ timestamps: true })
 @ObjectType()
@@ -31,7 +31,6 @@ export class Comment {
 
   @Field(() => Date)
   updatedAt: Date;
-
 }
 
 export type CommentDocument = Comment & Document;

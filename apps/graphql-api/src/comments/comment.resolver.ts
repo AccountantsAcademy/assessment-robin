@@ -1,7 +1,7 @@
-import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CommentService } from './comment.service';
-import { CreateCommentInputDTO } from './comment.dto'
-import { Comment } from './comment.model'
+import { CreateCommentInputDTO } from './comment.dto';
+import { Comment } from './comment.model';
 
 @Resolver()
 export class CommentResolver {
@@ -21,11 +21,10 @@ export class CommentResolver {
   async comments(
     @Args('postId', { type: () => ID }) postId: string,
     @Args('limit', { type: () => Number, nullable: true }) limit: number,
-    @Args('skip', { type: () => Number, nullable: true }) skip: number,
+    @Args('skip', { type: () => Number, nullable: true }) skip: number
   ) {
     return this.commentService.findByPostId(postId, limit, skip);
   }
-
 
   // mutations
 
@@ -35,5 +34,4 @@ export class CommentResolver {
   ): Promise<Comment> {
     return this.commentService.createComment(createCommentInput);
   }
-
 }

@@ -6,7 +6,7 @@ import { PostModule } from '../posts/post.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from '../users/user.module';
-import { CommentModule } from '../comments/comment.module'
+import { CommentModule } from '../comments/comment.module';
 
 @Module({
   imports: [
@@ -23,7 +23,9 @@ import { CommentModule } from '../comments/comment.module'
       playground: true,
       context: ({ req }) => {
         const token = req.headers.authorization || '';
-        const userId = token.startsWith('Bearer ') ? token.slice(7, token.length) : token;
+        const userId = token.startsWith('Bearer ')
+          ? token.slice(7, token.length)
+          : token;
         return { userId };
       },
     }),

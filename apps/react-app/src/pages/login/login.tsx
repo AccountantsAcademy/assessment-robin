@@ -5,7 +5,7 @@ import { GET_USER_BY_EMAIL } from '../../shared/queries';
 import { useNavigate } from 'react-router-dom';
 
 type User = {
-  _id: string,
+  _id: string;
   email: string;
   password: string;
 };
