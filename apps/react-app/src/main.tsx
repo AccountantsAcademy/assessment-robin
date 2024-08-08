@@ -9,11 +9,12 @@ import {
 } from 'react-router-dom';
 import { Navigation } from './components/nav/navigation';
 import Login from './pages/login/login';
-import Edit from './pages/edit/edit';
 import Overview from './pages/overview/overview';
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import Register from './pages/register/register';
+import { PostPage } from './pages/post/post-page'
+import { setContext } from '@apollo/client/link/context';
 
 const Layout = () => {
   return (
@@ -36,16 +37,16 @@ const router = createBrowserRouter([
         element: <Overview />,
       },
       {
-        path: 'edit',
-        element: <Edit />,
-      },
-      {
         path: 'login',
         element: <Login />,
       },
       {
         path: 'register',
         element: <Register />,
+      },
+      {
+        path: 'post/:id',
+        element: <PostPage />,
       },
     ],
   },
@@ -55,9 +56,25 @@ const router = createBrowserRouter([
   },
 ]);
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: 'http://localhost:3000/graphql',
-  cache: new InMemoryCache(),
+});
+
+const authLink = setContext((_, { headers }) => {
+  // Get the user ID from local storage
+  // This is used as `access token`
+  const userId = localStorage.getItem('id');
+  return {
+    headers: {
+      ...headers,
+      authorization: userId ? `Bearer ${userId}` : "",
+    }
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
 });
 
 const root = ReactDOM.createRoot(
