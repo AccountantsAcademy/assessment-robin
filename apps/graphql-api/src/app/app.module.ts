@@ -5,10 +5,12 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { ArticlesModule } from '../articles/articles.module'
 import { MongooseModule } from '@nestjs/mongoose'
 import { ConfigModule } from '@nestjs/config'
+import { UserModule } from '../users/user.module'
 
 @Module({
   imports: [
     ArticlesModule,
+    UserModule,
     ConfigModule.forRoot({
       cache: true,
       isGlobal: true,
