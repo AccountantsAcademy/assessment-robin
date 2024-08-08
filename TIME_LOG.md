@@ -10,8 +10,10 @@
 | 2024-08-08 | Fork git                             | 0.5                | Fight with git                                                             |
 | 2024-08-08 | Add timelog                          | 0.25               | Create fancy time log                                                      |
 | 2024-08-08 | Create post CRUD + impl and prettier | 1                  |                                                                            |
+| 2024-08-08 | Create comment CRUD + impl           | 2                  |                                                                            |
+| 2024-08-08 | Create liking mechanism + UI         | 1                  |                                                                            |
 
-_Total Time Spent: 5 hours_
+_Total Time Spent: 8 hours_
 
 # Searched documentation
 
