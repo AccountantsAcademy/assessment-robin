@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
-import { useLazyQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { REGISTER_USER } from '../../queries/queries';
 
-import { GET_USER_BY_EMAIL } from '../../queries/queries';
-import { useNavigate } from 'react-router-dom';
-
-type User = {
-  email: string;
-  password: string;
+type RegisterUserInput = {
+  createUserInput: {
+    email: string;
+    password: string;
+  };
 };
 
-type UserQuery = {
-  findUserByEmail: User;
+type RegisterUserResponse = {
+  createUser: {
+    email: string;
+  };
 };
 
-// Login form (styling: https://flowbite.com/blocks/marketing/login/)
-const Login = () => {
-  const [getUserByEmail] = useLazyQuery<UserQuery>(GET_USER_BY_EMAIL);
+const Register: React.FC = () => {
+  const [registerUser] = useMutation<RegisterUserResponse, RegisterUserInput>(
+    REGISTER_USER
+  );
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setError(null);
 
     const email = (
@@ -35,27 +36,27 @@ const Login = () => {
       ) as HTMLInputElement
     ).value;
 
-    const { data } = await getUserByEmail({ variables: { email } });
+    try {
+      const { data } = await registerUser({
+        variables: { createUserInput: { email, password } },
+      });
 
-    if (data) {
-      // TODO: this is NOT a save password validation :-)
-      const isValidPassword = password === data.findUserByEmail.password;
-      if (isValidPassword) {
-        localStorage.setItem('email', data.findUserByEmail.email);
+      if (data && data.createUser) {
+        localStorage.setItem('email', data.createUser.email);
         window.location.href = '/';
       } else {
-        setError('Please provide a valid email address and password.');
+        setError('Registration failed.');
       }
-    } else {
-      setError('Please provide a valid email address and password.');
+    } catch (err) {
+      setError('A user with this email address already exists.');
     }
-  }
+  };
 
   return (
     <div className="flex justify-center">
       <div className="card w-96 bg-base-100 shadow-xl mt-20 mb-20">
         <div className="card-body">
-          <h2 className="card-title">Login</h2>
+          <h2 className="card-title">Register</h2>
           {error && (
             <div role="alert" className="alert alert-error">
               <svg
@@ -116,18 +117,6 @@ const Login = () => {
             </div>
             <div className="card-actions justify-end">
               <button type="submit" className="btn btn-primary w-full">
-                Login
-              </button>
-
-              <p className="text-center text-gray-600 mt-8 mb-2">
-                No account yet?{' '}
-                <span className="font-semibold">Register for free.</span>
-              </p>
-              <button
-                type="button"
-                className="btn btn-secondary w-full mt-2"
-                onClick={() => navigate('/register')}
-              >
                 Register
               </button>
             </div>
@@ -138,4 +127,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

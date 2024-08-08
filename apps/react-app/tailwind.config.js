@@ -1,4 +1,4 @@
-import daisyui from "daisyui"
+import daisyui from 'daisyui';
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
 const { join } = require('path');
 
@@ -12,9 +12,7 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   daisyui: {
-    themes: ["nord"],
+    themes: ['nord'],
   },
-  plugins: [
-    daisyui
-  ],
+  plugins: [daisyui],
 };

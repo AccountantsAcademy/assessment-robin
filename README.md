@@ -43,12 +43,12 @@ You are tasked with creating a simple blog application that has the following fe
 
 3. React Components:
 
-   - Update the `<Article />` component to display a button to like a post.
-   - Update the `<Article />` component to display the number of likes a post has.
-   - Update the `<Article />` component to display an input to add a comment to a post.
-   - Update the `<Article />` component to display the comments of a post.
-   - Update the `<Article />` component to display a button to like a comment.
-   - Update the `<Article />` component to display the number of likes each comment has.
+   - Update the `<Post />` component to display a button to like a post.
+   - Update the `<Post />` component to display the number of likes a post has.
+   - Update the `<Post />` component to display an input to add a comment to a post.
+   - Update the `<Post />` component to display the comments of a post.
+   - Update the `<Post />` component to display a button to like a comment.
+   - Update the `<Post />` component to display the number of likes each comment has.
    - Ensure components are optimized for performance (use React hooks and memoization where appropriate).
 
 **Evaluation Criteria**:
@@ -75,4 +75,5 @@ You are tasked with creating a simple blog application that has the following fe
   - A live demonstration of the application's functionality
 
 > **FYI: Usage of Microsoft GitHub Copilot is endorsed, not prohibited.**
+
 # accountants-academy

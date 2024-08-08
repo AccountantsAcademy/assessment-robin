@@ -1,34 +1,40 @@
-import { gql, useQuery } from '@apollo/client'
-import { Article } from '../../components/article/article'
+import { gql, useQuery } from '@apollo/client';
+import { Article } from '../../components/article/article';
 
-type Article = {
-  title: string
-  content: string
-  author: string
-}
+type Author = {
+  email: string;
+};
 
-type ArticlesQuery = {
-  articles: Article[]
-}
+type Post = {
+  title: string;
+  content: string;
+  author: Author;
+};
+
+type PostQuery = {
+  posts: Post[];
+};
 
 export function Overview() {
-  const { data } = useQuery<ArticlesQuery>(gql`
+  const { data } = useQuery<PostQuery>(gql`
     query {
-      articles {
+      posts {
         title
         content
-        author
+        author {
+          email
+        }
       }
     }
-  `)
+  `);
   return (
     <>
       <h1 className="text-xl font-medium mb-4">Overview</h1>
-      {data?.articles?.map((article) => (
+      {data?.posts?.map(article => (
         <Article key={article.title} {...article} />
       ))}
     </>
-  )
+  );
 }
 
-export default Overview
+export default Overview;

@@ -1,15 +1,15 @@
-import { Module } from '@nestjs/common'
+import { Module } from '@nestjs/common';
 
-import { GraphQLModule } from '@nestjs/graphql'
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
-import { ArticlesModule } from '../articles/articles.module'
-import { MongooseModule } from '@nestjs/mongoose'
-import { ConfigModule } from '@nestjs/config'
-import { UserModule } from '../users/user.module'
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { PostsModule } from '../posts/posts.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
+import { UserModule } from '../users/user.module';
 
 @Module({
   imports: [
-    ArticlesModule,
+    PostsModule,
     UserModule,
     ConfigModule.forRoot({
       cache: true,
