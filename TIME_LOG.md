@@ -12,8 +12,9 @@
 | 2024-08-08 | Create post CRUD + impl and prettier | 1                  |                                                                            |
 | 2024-08-08 | Create comment CRUD + impl           | 2                  |                                                                            |
 | 2024-08-08 | Create liking mechanism + UI         | 1                  |                                                                            |
+| 2024-08-08 | Create generic like service          | 0.25               |                                                                            |
 
-_Total Time Spent: 8 hours_
+_Total Time Spent: 8.25 hours_
 
 # Searched documentation
 

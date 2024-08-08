@@ -1,17 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateCommentInputDTO } from './comment.dto';
-import { UserService } from '../users/user.service';
 import { Comment, CommentDocument } from './comment.model';
-import { PostService } from '../posts/post.service';
+import { LikeService } from '../common/like.service';
 
 @Injectable()
 export class CommentService {
   constructor(
     @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
-    private userService: UserService,
-    private postService: PostService
+    private likeService: LikeService
   ) {}
 
   async findByPostId(
@@ -46,5 +44,9 @@ export class CommentService {
     });
 
     return newComment.save();
+  }
+
+  async toggleCommentLike(commentId: string, userId: string): Promise<Comment> {
+    return this.likeService.toggleLike(this.commentModel, commentId, userId);
   }
 }

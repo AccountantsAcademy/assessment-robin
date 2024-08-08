@@ -4,12 +4,14 @@ import { Model } from 'mongoose';
 import { Post, PostDocument } from './post.model';
 import { CreatePostInputDTO } from './post.dto';
 import { UserService } from '../users/user.service';
+import { LikeService } from '../common/like.service';
 
 @Injectable()
 export class PostService {
   constructor(
     @InjectModel(Post.name) private postModel: Model<PostDocument>,
-    private userService: UserService
+    private userService: UserService,
+    private likeService: LikeService
   ) {}
 
   async createPost(postInput: CreatePostInputDTO): Promise<Post> {
@@ -70,26 +72,6 @@ export class PostService {
   }
 
   async togglePostLike(postId: string, userId: string): Promise<Post> {
-    const post = await this.postModel.findById(postId);
-
-    if (!post) {
-      throw new NotFoundException(`Post with ID ${postId} not found`);
-    }
-
-    const user = await this.userService.findById(userId);
-
-    if (!user) {
-      throw new NotFoundException(`User with ID ${userId} not found`);
-    }
-
-    const userAlreadyLiked = post.likes.some(u => u._id.toString() === userId);
-
-    if (userAlreadyLiked) {
-      post.likes = post.likes.filter(u => u._id.toString() !== userId);
-    } else {
-      post.likes.push(user);
-    }
-
-    return post.save();
+    return this.likeService.toggleLike(this.postModel, postId, userId);
   }
 }

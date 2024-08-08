@@ -2,6 +2,7 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { User } from '../users/user.model';
 import mongoose from 'mongoose';
+import { BaseDocument } from '../common/like.service';
 
 @Schema({ timestamps: true })
 @ObjectType()
@@ -43,5 +44,5 @@ export class Post {
   numberOfLikes?: number;
 }
 
-export type PostDocument = Post & Document;
+export interface PostDocument extends Post, BaseDocument {}
 export const PostSchema = SchemaFactory.createForClass(Post);
