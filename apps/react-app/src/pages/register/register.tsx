@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { REGISTER_USER } from '../../queries/queries';
+import { REGISTER_USER } from '../../shared/queries';
 
 type RegisterUserInput = {
   createUserInput: {

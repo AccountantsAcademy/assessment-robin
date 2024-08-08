@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 
-import { GET_USER_BY_EMAIL } from '../../queries/queries';
+import { GET_USER_BY_EMAIL } from '../../shared/queries';
 import { useNavigate } from 'react-router-dom';
 
 type User = {
+  _id: string,
   email: string;
   password: string;
 };
@@ -42,6 +43,7 @@ const Login = () => {
       const isValidPassword = password === data.findUserByEmail.password;
       if (isValidPassword) {
         localStorage.setItem('email', data.findUserByEmail.email);
+        localStorage.setItem('id', data.findUserByEmail._id);
         window.location.href = '/';
       } else {
         setError('Please provide a valid email address and password.');
