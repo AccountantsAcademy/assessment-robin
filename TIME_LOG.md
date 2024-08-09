@@ -1,20 +1,21 @@
 # Time Log
 
-| Date       | Task Description                     | Time Spent (hours) | Notes                                                                      |
-|------------|--------------------------------------|--------------------|----------------------------------------------------------------------------|
-| 2024-08-06 | Initial setup                        | 0.5                | Read assignment, create MongoDB cluster + setup of project and first start |
-| 2024-08-07 | Read MongoDB documentation           | 0.5                |                                                                            |
-| 2024-08-07 | Create db schema                     | 0.25               | (in my head)                                                               |
-| 2024-08-07 | Create user CRUD + login             | 1                  |                                                                            |
-| 2024-08-08 | Add daisyUI + register               | 1                  |                                                                            |
-| 2024-08-08 | Fork git                             | 0.5                | Fight with git                                                             |
-| 2024-08-08 | Add timelog                          | 0.25               | Create fancy time log                                                      |
-| 2024-08-08 | Create post CRUD + impl and prettier | 1                  |                                                                            |
-| 2024-08-08 | Create comment CRUD + impl           | 2                  |                                                                            |
-| 2024-08-08 | Create liking mechanism + UI         | 1                  |                                                                            |
-| 2024-08-08 | Create generic like service          | 0.25               |                                                                            |
+| Date       | Task Description                                                   | Time Spent (hours) | Notes                                                                      |
+|------------|--------------------------------------------------------------------|--------------------|----------------------------------------------------------------------------|
+| 2024-08-06 | Initial setup                                                      | 0.5                | Read assignment, create MongoDB cluster + setup of project and first start |
+| 2024-08-07 | Read MongoDB documentation                                         | 0.5                |                                                                            |
+| 2024-08-07 | Create db schema                                                   | 0.25               | (in my head)                                                               |
+| 2024-08-07 | Create user CRUD + login                                           | 1                  |                                                                            |
+| 2024-08-08 | Add daisyUI + register                                             | 1                  |                                                                            |
+| 2024-08-08 | Fork git                                                           | 0.5                | Fight with git                                                             |
+| 2024-08-08 | Add timelog                                                        | 0.25               | Create fancy time log                                                      |
+| 2024-08-08 | Create post CRUD + impl and prettier                               | 1                  |                                                                            |
+| 2024-08-08 | Create comment CRUD + impl                                         | 2                  |                                                                            |
+| 2024-08-08 | Create liking mechanism + UI                                       | 1                  |                                                                            |
+| 2024-08-08 | Create generic like service                                        | 0.25               |                                                                            |
+| 2024-08-09 | Finalize code + do improvemts and add liking mechanism to comments | 3                  |                                                                            |
 
-_Total Time Spent: 8.25 hours_
+_Total Time Spent: 11.25 hours_
 
 # Searched documentation
 
