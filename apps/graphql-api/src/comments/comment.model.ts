@@ -31,7 +31,17 @@ export class Comment {
 
   @Field(() => Date)
   updatedAt: Date;
+
+  @Field(() => Boolean, { nullable: true })
+  hasLiked?: boolean;
+
+  @Field(() => Number, { nullable: true })
+  numberOfLikes?: number;
 }
 
 export type CommentDocument = Comment & Document;
 export const CommentSchema = SchemaFactory.createForClass(Comment);
+CommentSchema.index({ post: 1 });
+CommentSchema.index({ author: 1 });
+CommentSchema.index({ likes: 1 });
+CommentSchema.index({ post: 1, createdAt: -1 });

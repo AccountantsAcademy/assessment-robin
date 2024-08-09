@@ -56,6 +56,8 @@ export const GET_COMMENTS_BY_POST_ID = gql`
         email
       }
       createdAt
+      hasLiked
+      numberOfLikes
     }
   }
 `;
@@ -95,6 +97,14 @@ export const CREATE_COMMENT = gql`
 export const TOGGLE_POST_LIKE = gql`
   mutation TogglePostLike($postId: ID!, $userId: ID!) {
     togglePostLike(postId: $postId, userId: $userId) {
+      id: _id
+    }
+  }
+`;
+
+export const TOGGLE_COMMENT_LIKE = gql`
+  mutation ToggleCommentLike($commentId: ID!) {
+    toggleCommentLike(commentId: $commentId) {
       id: _id
     }
   }

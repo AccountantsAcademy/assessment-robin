@@ -42,8 +42,7 @@ const Register: React.FC = () => {
       });
 
       if (data && data.createUser) {
-        localStorage.setItem('email', data.createUser.email);
-        window.location.href = '/';
+        window.location.href = '/login';
       } else {
         setError('Registration failed.');
       }

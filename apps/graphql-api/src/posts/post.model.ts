@@ -46,3 +46,6 @@ export class Post {
 
 export interface PostDocument extends Post, BaseDocument {}
 export const PostSchema = SchemaFactory.createForClass(Post);
+PostSchema.index({ author: 1 });
+PostSchema.index({ likes: 1 });
+PostSchema.index({ author: 1, createdAt: -1 });

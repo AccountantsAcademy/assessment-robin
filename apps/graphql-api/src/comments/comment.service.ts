@@ -15,15 +15,25 @@ export class CommentService {
   async findByPostId(
     postId: string,
     limit: number,
-    skip: number
+    skip: number,
+    userId: string,
   ): Promise<Comment[]> {
-    return this.commentModel
+    const comments = await this.commentModel
       .find({ post: postId })
       .sort({ createdAt: -1 })
       .limit(limit)
       .skip(skip)
       .populate('author')
       .exec();
+
+    return comments.map(comment => {
+      const hasLiked = comment.likes.some(user => user._id.toString() === userId);
+      return {
+        ...comment.toObject(),
+        hasLiked,
+        numberOfLikes: comment.likes.length ?? 0,
+      };
+    });
   }
 
   async countComments(postId: string): Promise<number> {
