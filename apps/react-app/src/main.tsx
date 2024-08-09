@@ -1,18 +1,25 @@
-import { StrictMode } from 'react'
-import * as ReactDOM from 'react-dom/client'
+import { StrictMode } from 'react';
+import * as ReactDOM from 'react-dom/client';
 
 import {
   createBrowserRouter,
   Navigate,
   Outlet,
   RouterProvider,
-} from 'react-router-dom'
-import { Navigation } from './components/nav/navigation'
-import { Login } from './pages/login/login'
-import Edit from './pages/edit/edit'
-import Overview from './pages/overview/overview'
+} from 'react-router-dom';
+import { Navigation } from './components/nav/navigation';
+import Login from './pages/login/login';
+import Overview from './pages/overview/overview';
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client';
+import Register from './pages/register/register';
+import { PostPage } from './pages/post/post-page';
+import { setContext } from '@apollo/client/link/context';
 
 const Layout = () => {
   return (
@@ -22,8 +29,8 @@ const Layout = () => {
         <Outlet />
       </div>
     </>
-  )
-}
+  );
+};
 
 const router = createBrowserRouter([
   {
@@ -35,12 +42,16 @@ const router = createBrowserRouter([
         element: <Overview />,
       },
       {
-        path: 'edit',
-        element: <Edit />,
-      },
-      {
         path: 'login',
         element: <Login />,
+      },
+      {
+        path: 'register',
+        element: <Register />,
+      },
+      {
+        path: 'post/:id',
+        element: <PostPage />,
       },
     ],
   },
@@ -48,14 +59,32 @@ const router = createBrowserRouter([
     path: '*',
     element: <Navigate to={'/'} />,
   },
-])
+]);
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:3000/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  // Get the user ID from local storage
+  // This is used as `access token`
+  const userId = localStorage.getItem('id');
+  return {
+    headers: {
+      ...headers,
+      authorization: userId ? `Bearer ${userId}` : '',
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-})
+});
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 
 root.render(
   <StrictMode>
@@ -63,4 +92,4 @@ root.render(
       <RouterProvider router={router} />
     </ApolloProvider>
   </StrictMode>
-)
+);
