@@ -1,0 +1,34 @@
+erDiagram
+  User {
+    string _id PK
+    string email
+    string password
+    date createdAt
+    date updatedAt
+  }
+
+  Post {
+    string _id PK
+    string title
+    string content
+    string author FK
+    string[] likes
+    date createdAt
+    date updatedAt
+  }
+
+  Comment {
+    string _id PK
+    string post FK
+    string author FK
+    string content
+    string[] likes
+    date createdAt
+    date updatedAt
+  }
+
+  User ||--o{ Post: "author"
+  User ||--o{ Post: "likes"
+  User ||--o{ Comment: "author"
+  User ||--o{ Comment: "likes"
+  Post ||--o{ Comment: "post"
