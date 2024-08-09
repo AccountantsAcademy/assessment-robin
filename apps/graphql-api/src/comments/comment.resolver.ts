@@ -22,7 +22,7 @@ export class CommentResolver {
     @Args('postId', { type: () => ID }) postId: string,
     @Args('limit', { type: () => Number, nullable: true }) limit: number,
     @Args('skip', { type: () => Number, nullable: true }) skip: number,
-    @Context('userId') userId: string,
+    @Context('userId') userId: string
   ) {
     return this.commentService.findByPostId(postId, limit, skip, userId);
   }
@@ -39,7 +39,7 @@ export class CommentResolver {
   @Mutation(() => Comment)
   async toggleCommentLike(
     @Context('userId') userId: string,
-    @Args('commentId', { type: () => ID }) commentId: string,
+    @Args('commentId', { type: () => ID }) commentId: string
   ): Promise<Comment> {
     return this.commentService.toggleCommentLike(commentId, userId);
   }

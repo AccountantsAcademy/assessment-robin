@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { CREATE_POST } from '../../shared/queries';
@@ -10,26 +10,36 @@ type EditModalProps = {
 };
 
 export function EditModal({ isOpen, onClose, refetch }: EditModalProps) {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [formState, setFormState] = useState({
+    title: '',
+    content: '',
+  });
+
   const [createPost] = useMutation(CREATE_POST);
   const navigate = useNavigate();
+  const authorId = localStorage.getItem('id');
 
-  const handleSubmit = async (e: any) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormState(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await createPost({
         variables: {
-          title,
-          content,
-          authorId: localStorage.getItem('id'),
+          ...formState,
+          authorId,
         },
       });
       navigate('/overview');
       refetch();
       onClose();
     } catch (error) {
-      console.error('Error creating post:', error);
+      console.error('Error creating post:', (error as Error).message);
     }
   };
 
@@ -42,17 +52,19 @@ export function EditModal({ isOpen, onClose, refetch }: EditModalProps) {
         <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
           <input
             type="text"
+            name="title"
             required
             placeholder="Title"
             className="input input-bordered w-full"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
+            value={formState.title}
+            onChange={handleChange}
           />
           <textarea
+            name="content"
             placeholder="Content"
             className="textarea textarea-bordered w-full"
-            value={content}
-            onChange={e => setContent(e.target.value)}
+            value={formState.content}
+            onChange={handleChange}
           />
           <button type="submit" className="btn btn-primary">
             Create

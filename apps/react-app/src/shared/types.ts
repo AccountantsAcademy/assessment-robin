@@ -18,4 +18,4 @@ export type Comment = {
   hasLiked?: boolean;
   numberOfLikes?: number;
   createdAt: string;
-}
+};

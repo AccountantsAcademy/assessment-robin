@@ -16,7 +16,7 @@ export class CommentService {
     postId: string,
     limit: number,
     skip: number,
-    userId: string,
+    userId: string
   ): Promise<Comment[]> {
     const comments = await this.commentModel
       .find({ post: postId })
@@ -26,8 +26,11 @@ export class CommentService {
       .populate('author')
       .exec();
 
+    // Add hasLiked and numberOfLikes properties to each comment
     return comments.map(comment => {
-      const hasLiked = comment.likes.some(user => user._id.toString() === userId);
+      const hasLiked = comment.likes.some(
+        user => user._id.toString() === userId
+      );
       return {
         ...comment.toObject(),
         hasLiked,
